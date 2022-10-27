@@ -20,11 +20,16 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 ```
   
 ### Setup secret with cloudflare token
+Token needs:
+Zone.Zone:Read
+Zone.DNS:Edit
+
 ```
 apiVersion: v1
 kind: Secret
 metadata:
   name: cloudflare-api-token-secret
+  namespace: cert-manager
 type: Opaque
 stringData:
   api-token: <token>
@@ -36,6 +41,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt-prod
+  namespace: cert-manager
 spec:
   acme:
     email: <e-mail>
