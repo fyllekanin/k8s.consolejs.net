@@ -59,6 +59,15 @@ jobs:
           context: ./test-app
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+      
+      - name: 'Kustomize Build'
+        uses: karancode/kustomize-github-action@master
+        with:
+          kustomize_version: '3.0.0'
+          kustomize_build_dir: './test-app/kustomize/base'
+          kustomize_output_file: "./deployment.yaml"
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           
       - uses: actions-hub/kubectl@master
         env:
@@ -66,4 +75,4 @@ jobs:
           KUBE_CERTIFICATE: ${{ secrets.KUBE_CERTIFICATE }}
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
-          args: -n test-namespace get pods
+          args: -n test-namespace apply -f deployment.yaml 
