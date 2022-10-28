@@ -27,10 +27,10 @@ jobs:
           npm run test
           npm run build
 
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
-
+      - name: package.json info
+        id: info
+        uses: jaywcjlove/github-action-package@main
+        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -43,7 +43,7 @@ jobs:
         with:
           images: tovven/test-service
           tags: |
-            type=raw,value=${{ steps.package-version.outputs.current-version}}
+            type=raw,value=${{ steps.info.outputs.version }}
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
