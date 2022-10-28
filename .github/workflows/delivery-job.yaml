@@ -2,7 +2,7 @@ name: DeliveryJob
 
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
 
 jobs:
   build:
@@ -62,6 +62,8 @@ jobs:
           
       - uses: actions-hub/kubectl@master
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          KUBE_HOST: ${{ secrets.KUBE_HOST }}
+          KUBE_CERTIFICATE: ${{ secrets.KUBE_CERTIFICATE }}
+          KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
           args: get pods
