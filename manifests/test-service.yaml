@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: webserver-app
-          image: nginx:1.8
+          image: nginx:latest
 ---
 apiVersion: v1
 kind: Service

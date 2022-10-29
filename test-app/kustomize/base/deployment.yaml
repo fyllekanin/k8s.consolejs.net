@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-service-depl
+spec:
+  selector:
+    matchLabels:
+      app: test-service-app
+  template:
+    metadata:
+      labels:
+        app: test-service-app
+    spec:
+      containers:
+        - name: test-service-app
+          image: tovven/test-service:0.0.0
