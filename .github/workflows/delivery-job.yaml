@@ -2,9 +2,7 @@ name: DeliveryJob
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ develop ]
 
 jobs:
   build:
@@ -29,10 +27,12 @@ jobs:
           npm run test
           npm run build
 
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
-
+      - name: package.json info
+        id: info
+        uses: jaywcjlove/github-action-package@main
+        with:
+          path: ./test-app/package.json
+        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -44,6 +44,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: tovven/test-service
+          tags: |
+            type=raw,value=${{ steps.info.outputs.version }}
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -54,5 +56,23 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
+          context: ./test-app
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+      
+      - name: 'Kustomize Build'
+        uses: karancode/kustomize-github-action@master
+        with:
+          kustomize_version: '3.0.0'
+          kustomize_build_dir: 'test-app/kustomize/base'
+          kustomize_output_file: "./deployment.yaml"
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_HOST: ${{ secrets.KUBE_HOST }}
+          KUBE_CERTIFICATE: ${{ secrets.KUBE_CERTIFICATE }}
+          KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
+        with:
+          args: -n test-namespace apply -f deployment.yaml 
