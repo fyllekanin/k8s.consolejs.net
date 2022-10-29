@@ -64,7 +64,7 @@ jobs:
         uses: karancode/kustomize-github-action@master
         with:
           kustomize_version: '3.0.0'
-          kustomize_build_dir: './test-app/kustomize/base'
+          kustomize_build_dir: 'test-app/kustomize/base'
           kustomize_output_file: "./deployment.yaml"
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.TOKEN_GITHUB }}
