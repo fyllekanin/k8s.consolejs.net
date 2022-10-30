@@ -75,4 +75,4 @@ jobs:
           KUBE_CERTIFICATE: ${{ secrets.KUBE_CERTIFICATE }}
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
-          args: -n test-namespace get pod
+          args: -n test-namespace appl -f deployment.yaml
