@@ -18,6 +18,13 @@ Install it
 ```
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.yaml
 ```
+
+### Variables to update in all snippets
+{email}
+{token}
+{namespace}
+{secret-name}
+{domain}.{ext}
   
 ### Setup secret with cloudflare token
 Token needs:
@@ -32,7 +39,7 @@ metadata:
   namespace: cert-manager
 type: Opaque
 stringData:
-  api-token: <token>
+  api-token: {token}
 ```
 
 ### Setup issues
@@ -44,14 +51,14 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: <e-mail>
+    email: {e-mail}
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
     - dns01:
         cloudflare:
-          email: <e-mail>
+          email: {e-mail}
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token
@@ -62,10 +69,10 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: k8s-consolejs-net
+  name: {secret-name}
   namespace: cert-manager
 spec:
-  secretName: k8s-consolejs-net
+  secretName: {secret-name}
   issuerRef:
     name: letsencrypt-prod
   secretTemplate:
@@ -75,6 +82,6 @@ spec:
   duration: 2160h # 90d
   renewBefore: 720h # 30d before SSL will expire, renew it
   dnsNames:
-    - "k8s.consolejs.net"
-    - "*.k8s.consolejs.net"
+    - "{domain}.{ext}"
+    - "*.{domain}.{ext}"
 ```
