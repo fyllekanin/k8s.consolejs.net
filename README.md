@@ -5,3 +5,10 @@ Will update when time
 ![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 Kitty
+
+
+| Name 	| Type      	| Alternative 	| Deprecated 	|   	|
+|------	|-----------	|-------------	|------------	|---	|
+| 2313 	| Something 	| Dont know   	| Yes        	|   	|
+|      	|           	|             	|            	|   	|
+|      	|           	|             	|            	|   	|
