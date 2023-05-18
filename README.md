@@ -1,13 +1,30 @@
-# k8s.consolejs.net
+---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: revealjs::revealjs_presentation
+---
 
-Will update when time
+# In the morning
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+## Getting up
 
-Kitty
+- Turn off alarm
+- Get out of bed
 
+## Breakfast
 
-| Name 	| Type      	| Alternative 	| Deprecated 	|   	|
-|------	|-----------	|-------------	|------------	|---	|
-| 2313 	| Something 	| Dont know   	| Yes        	|   	|
-| 2316 	| Yeay      	| Test        	| No         	|   	|
+- Eat eggs
+- Drink coffee
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+## Going to sleep
+
+- Get in bed
+- Count sheep
