@@ -59,7 +59,16 @@ jobs:
           context: ./test-app
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-      - uses: tale/kubectl-action@v1
+      - name: 'Kustomize Build'
+        uses: karancode/kustomize-github-action@master
         with:
-          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-      - run: kubectl apply -n test-namespace -f ./test-app/deployment.yaml
+          kustomize_install: true
+          kustomize_version: '5.0.0'
+          kustomize_build_dir: 'test-app/kustomize/base'
+          kustomize_output_file: "./deployment.yaml"
+          kustomize_comment: false
+      - uses: danielr1996/kubectl-action@1.0.0
+        name: Deploy
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          args: apply -f deployment.yaml
