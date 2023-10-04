@@ -45,7 +45,7 @@ stringData:
 ### Setup issues
 ```
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
   namespace: cert-manager
