@@ -68,9 +68,7 @@ jobs:
           kustomize_build_dir: 'test-app/kustomize/base'
           kustomize_output_file: "./deployment.yaml"
           kustomize_comment: false
-          
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      - uses: tale/kubectl-action@v1
         with:
-          args: -n test-namespace apply -f deployment.yaml
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+      - run: kubectl apply -n test-namespace apply -f deployment.yaml
