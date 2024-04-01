@@ -43,30 +43,30 @@ And enter the kubernetes-ingress/deployments
 
 ### Create namespace and service account
 ```
-kubectl apply -f common/ns-and-sa.yaml
+kubectl apply -f deployments/common/ns-and-sa.yaml
 ```
 ### Create cluster role and cluster role binding for the SA
 ```
-kubectl apply -f rbac/rbac.yaml
+kubectl apply -f deployments/rbac/rbac.yaml
 ```
 ### Create common secret
 ```
-kubectl apply -f common/default-server-secret.yaml
+kubectl apply -f examples/shared-examples/default-server-secret/default-server-secret.yaml
 ```
 ### Create config map
 ```
-kubectl apply -f common/nginx-config.yaml
+kubectl apply -f deployments/common/nginx-config.yaml
 ```
 ### Create IngressClass
 ```
-kubectl apply -f common/ingress-class.yaml
+kubectl apply -f deployments/common/ingress-class.yaml
 ```
 ### Setup custom resources
 ```
-kubectl apply -f common/crds/k8s.nginx.org_virtualservers.yaml
-kubectl apply -f common/crds/k8s.nginx.org_virtualserverroutes.yaml
-kubectl apply -f common/crds/k8s.nginx.org_transportservers.yaml
-kubectl apply -f common/crds/k8s.nginx.org_policies.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_virtualservers.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_virtualserverroutes.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_transportservers.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_policies.yaml
 ```
 ### Add load balacing posibility
 ```
@@ -74,5 +74,5 @@ kubectl apply -f common/crds/k8s.nginx.org_globalconfigurations.yaml
 ```
 ### Setup the daemonset
 ```
-kubectl apply -f daemon-set/nginx-ingress.yaml
+kubectl apply -f deployments/daemon-set/nginx-ingress.yaml
 ```
