@@ -44,4 +44,5 @@ users:
     user:
       token: ${token}
 current-context: ${serviceAccount}@${clusterName}
+"
 ```
