@@ -61,13 +61,6 @@ kubectl apply -f deployments/common/nginx-config.yaml
 ```
 kubectl apply -f deployments/common/ingress-class.yaml
 ```
-### Setup custom resources
-```
-kubectl apply -f config/crd/bases/k8s.nginx.org_virtualservers.yaml
-kubectl apply -f config/crd/bases/k8s.nginx.org_virtualserverroutes.yaml
-kubectl apply -f config/crd/bases/k8s.nginx.org_transportservers.yaml
-kubectl apply -f config/crd/bases/k8s.nginx.org_policies.yaml
-```
 ### Add load balacing posibility
 ```
 kubectl apply -f common/crds/k8s.nginx.org_globalconfigurations.yaml
